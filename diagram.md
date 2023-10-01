@@ -1,40 +1,51 @@
 ```mermaid
-graph TD
+graph LR
 
-    %%Capa de hardware%%
-    GPIO("GPIO")
-    DAC("DAC")
-    RGB_LED("RGB_LED")
-    PIT("PIT")
-    NVIC("NVIC")
-    Watchdog("Watchdog")
+    UI("UI")
+    subgraph Lógica
+        Logic("Lógica")
+        Main("Main")
+    end
+    subgraph Control de visualización y pantalla
+        Display("Control de visualización y pantalla")
+        Config_Time("Configuración de la hora")
+        Alarm("Alarma")
+        Stopwatch("Cronómetro")
+        Clock("Reloj")
+        subgraph Visualización
+            Display_Segments("Display de segmentos")
+            Digital_Clock_Control("Control del reloj digital")
+            Display_Error("Visualización de errores")
+        end
+    end
+    subgraph Hardware
+        GPIO("GPIO")
+        DAC("DAC")
+        RGB_LED("RGB_LED")
+        PIT("PIT")
+        NVIC("NVIC")
+        Watchdog("Watchdog")
+    end
 
-    %%Capa de control de visualización y pantalla%%
-    Display("Control de visualización y pantalla")
-    Config_Time("Configuración de la hora")
-    Alarm("Alarma")
-    Stopwatch("Cronómetro")
-    Clock("Reloj")
-
-    %%Capa de lógica de aplicación%%
-    Logic("Lógica de aplicación")
-    Main("Main")
-
-    %%Capa de interfaz de usuario%% (UI)
-    UI("Interfaz de usuario")
-
-    %%Conexiones%%
-    GPIO --> Display
-    DAC --> Display
-    RGB_LED --> Display
-    PIT --> Display
-    NVIC --> Display
-    Watchdog --> Display
-    Display --> Logic
+    UI --> Logic
     Logic --> Main
-    Logic --> UI
+    Logic --> Display
+    Display --> Config_Time
+    Display --> Alarm
+    Display --> Stopwatch
+    Display --> Clock
+    Display --> Visualización
+    Visualización --> Display_Segments
+    Visualización --> Digital_Clock_Control
+    Visualización --> Display_Error
+    Display --> Hardware
+    Hardware --> GPIO
+    Hardware --> DAC
+    Hardware --> RGB_LED
+    Hardware --> PIT
+    Hardware --> NVIC
+    Hardware --> Watchdog
 
-    %%Estilos%%
     style UI fill:#e6f2ff
     style Logic fill:#f2f2f2
     style Main fill:#f2f2f2
