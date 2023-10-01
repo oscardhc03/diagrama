@@ -1,65 +1,70 @@
 ```mermaid
-graph LR
-title Diagrama por capas con Middleware Abstraction Layer (MAL)
+graph TD
 
-    UI("UI")
-    subgraph Lógica
-        Logic("Lógica")
-        Main("Main")
+subgraph MAL("Middleware Abstraction Layer (MAL)")
+    subgraph GPIO
+        GPIO.c
+        GPIO.h
     end
-    subgraph Control de visualización y pantalla
-        MAL("Middleware Abstraction Layer")
-        MAL --> Display("Control de visualización y pantalla")
-        Config_Time("Configuración de la hora")
-        Alarm("Alarma")
-        Stopwatch("Cronómetro")
-        Clock("Reloj")
-        subgraph Visualización
-            Display_Segments("Display de segmentos")
-            Digital_Clock_Control("Control del reloj digital")
-            Display_Error("Visualización de errores")
-        end
+    subgraph DAC
+        DAC.c
+        DAC.h
     end
-    subgraph Hardware
-        GPIO("GPIO")
-        DAC("DAC")
-        RGB_LED("RGB_LED")
-        PIT("PIT")
-        NVIC("NVIC")
-        Watchdog("Watchdog")
+    subgraph RGB_LED
+        RGB_LED.c
+        RGB_LED.h
     end
+    subgraph PIT
+        PIT.c
+        PIT.h
+    end
+    subgraph NVIC
+        NVIC.c
+        NVIC.h
+    end
+    subgraph Watchdog
+        Watchdog.c
+        Watchdog.h
+    end
+end
 
-    UI --> Logic
-    Logic --> Main
-    Logic --> Display
-    Display --> Config_Time
-    Display --> Alarm
-    Display --> Stopwatch
-    Display --> Clock
-    Display --> Visualización
-    Visualización --> Display_Segments
-    Visualización --> Digital_Clock_Control
-    Visualización --> Display_Error
-    Display --> Hardware
-    Hardware --> GPIO
-    Hardware --> DAC
-    Hardware --> RGB_LED
-    Hardware --> PIT
-    Hardware --> NVIC
-    Hardware --> Watchdog
+subgraph Control("Capa de Control de Visualización y Pantalla")
+    subgraph Display
+        Display_Segments.c
+        Display_Segments.h
+    end
+    subgraph Digital_Clock_Control
+        Digital_Clock_Control.c
+        Digital_Clock_Control.h
+    end
+    subgraph Display_Error
+        Display_Error.c
+        Display_Error.h
+    end
+end
 
-    style UI fill:#e6f2ff
-    style Logic fill:#f2f2f2
-    style Main fill:#f2f2f2
-    style Display fill:#f2f2f2
-    style Config_Time fill:#f2f2f2
-    style Alarm fill:#f2f2f2
-    style Stopwatch fill:#f2f2f2
-    style Clock fill:#f2f2f2
-    style GPIO fill:#f2f2f2
-    style DAC fill:#f2f2f2
-    style RGB_LED fill:#f2f2f2
-    style PIT fill:#f2f2f2
-    style NVIC fill:#f2f2f2
-    style Watchdog fill:#f2f2f2
-    style MAL fill:#e6f2ff
+subgraph Logic("Capa de Lógica de Aplicación")
+    subgraph Clock
+        Clock.c
+        Clock.h
+    end
+    subgraph Stopwatch
+        Stopwatch.c
+        Stopwatch.h
+    end
+    subgraph Alarm
+        Alarm.c
+        Alarm.h
+    end
+    subgraph Config_Time
+        Config_Time.c
+        Config_Time.h
+    end
+end
+
+subgraph UI("Capa de Interfaz de Usuario (UI)")
+    subgraph Main
+        Main.c
+        Main.h
+    end
+end
