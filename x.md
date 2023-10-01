@@ -1,3 +1,4 @@
+```mermaid
 graph LR
     UI("UI")
     subgraph Lógica
