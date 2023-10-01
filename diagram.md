@@ -7,7 +7,8 @@ graph LR
         Main("Main")
     end
     subgraph Control de visualización y pantalla
-        Display("Control de visualización y pantalla")
+        MAL("Middleware Abstraction Layer")
+        MAL --> Display("Control de visualización y pantalla")
         Config_Time("Configuración de la hora")
         Alarm("Alarma")
         Stopwatch("Cronómetro")
@@ -60,3 +61,4 @@ graph LR
     style PIT fill:#f2f2f2
     style NVIC fill:#f2f2f2
     style Watchdog fill:#f2f2f2
+    style MAL fill:#e6f2ff
