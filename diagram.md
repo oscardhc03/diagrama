@@ -1,5 +1,6 @@
 ```mermaid
 graph LR
+title Diagrama por capas con Middleware Abstraction Layer (MAL)
 
     UI("UI")
     subgraph Lógica
