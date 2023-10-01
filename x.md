@@ -1,9 +1,12 @@
 ```mermaid
 graph LR
-    UI("UI")
-    subgraph Lógica
-        Logic("Lógica")
-        Main("Main")
+    subgraph Hardware
+        MAL --> GPIO("GPIO")
+        MAL --> DAC("DAC")
+        MAL --> RGB_LED("RGB_LED")
+        MAL --> PIT("PIT")
+        MAL --> NVIC("NVIC")
+        MAL --> Watchdog("Watchdog")
     end
     subgraph Control_de_visualización_y_pantalla
         MAL("Middleware Abstraction Layer")
@@ -18,32 +21,17 @@ graph LR
             MAL --> Display_Error("Visualización de errores")
         end
     end
-    subgraph Hardware
-        MAL --> GPIO("GPIO")
-        MAL --> DAC("DAC")
-        MAL --> RGB_LED("RGB_LED")
-        MAL --> PIT("PIT")
-        MAL --> NVIC("NVIC")
-        MAL --> Watchdog("Watchdog")
+    subgraph Lógica
+        Logic("Lógica")
+        Main("Main")
     end
-    UI --> Logic
-    Logic --> Main
+    UI("UI") --> Logic
     Logic --> Display
     Display --> Config_Time
     Display --> Alarm
     Display --> Stopwatch
     Display --> Clock
     Display --> Visualización
-    Visualización --> Display_Segments
-    Visualización --> Digital_Clock_Control
-    Visualización --> Display_Error
-    Display --> Hardware
-    Hardware --> GPIO
-    Hardware --> DAC
-    Hardware --> RGB_LED
-    Hardware --> PIT
-    Hardware --> NVIC
-    Hardware --> Watchdog
     style UI fill:#e6f2ff
     style Logic fill:#f2f2f2
     style Main fill:#f2f2f2
@@ -59,3 +47,4 @@ graph LR
     style NVIC fill:#f2f2f2
     style Watchdog fill:#f2f2f2
     style MAL fill:#e6f2ff
+
